@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1 id="kilometers"></h1>
+
+<p id="username">
+
+</p>
+
+<input type="text" placeholder="Enter Text" id="message"/>
+
+<input type="submit" value="Send" id="send" />
+<br />
+  <?php global $current_user;
+       get_currentuserinfo();
+
+       echo '<p>Username: ' . $current_user->user_login . "</p>";
+       echo '<p>User email: ' . $current_user->user_email . "</p>";
+       echo '<p>User level: ' . $current_user->user_level . "</p>";
+       echo '<p>User first name: ' . $current_user->user_firstname . "</p>";
+       echo '<p>User last name: ' . $current_user->user_lastname . "</p>";
+       echo '<p>User display name: ' . $current_user->display_name . "</p>";
+       echo '<p>User ID: ' . $current_user->ID . "\n";
+  ?>
+  <!-- FireBase Install -->
+  <script src="https://cdn.firebase.com/js/client/2.4.1/firebase.js"></script>
+  <script> var myFirebaseRef = new Firebase("https://earth-day-natgeo.firebaseio.com");
+
+  var kilometersKey = "kilometers";
+  var lightsKey = 'lights';
+  var meatlessMealsKey = 'meatlessmeals';
+  var showerKey = 'shower';
+  var oldKilometers = "";
+  var packetKilometers = "";
+  var packetLights = "";
+  var packetMeatlessMeals = "";
+  var packetShower = "";
+  var kilometersEntered = "";
+
+  // myFirebaseRef.child("jonsmith/greenactions/kilometers").on("value", function(snapshot) { oldKilometers = document.getElementById("kilometers");
+  // oldKilometers.innerHTML = snapshot.val();
+  // });
+
+  var greenactions = myFirebaseRef.child("jonsmith/greenactions").on("value", function(snapshot) {
+    // console.log(snapshot.val().kilometers);
+  packetKilometers = snapshot.val().kilometers;
+  packetLights = snapshot.val().lights;
+  packetMeatlessMeals = snapshot.val().meatlessmeals;
+  packetShower = snapshot.val().shower;
+
+  console.log(packetKilometers);
+  console.log(packetLights);
+  console.log(packetMeatlessMeals);
+  console.log(packetShower);
+  });
+  document.getElementById('send').onclick = function(){ kilometersEntered = document.getElementById('message').value;
+  var newKilometersNumberVal = parseInt(kilometersEntered);
+  var oldKilometersNumberVal = parseInt(oldKilometers.innerHTML);
+  var totalKilometers = oldKilometersNumberVal + newKilometersNumberVal;
+  var myFirebaseRef = new Firebase("https://earth-day-natgeo.firebaseio.com");
+  myFirebaseRef.child('jonsmith/greenactions').set({kilometers: totalKilometers, lights: packetLights, shower: packetShower, meatlessmeals: packetMeatlessMeals });
+  };
+  </script>
+  </body>
+</html>

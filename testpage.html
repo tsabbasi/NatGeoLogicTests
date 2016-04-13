@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>blah</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <h1>Kilometers Walked/Biked</h1>
+    <div id="kilometersWalkedProgBar"></div>
+    <input id="kilometersProgAmountEntered" type="text" placeholder="Enter Kilometers Walked/Biked" />
+    <input id="sendKilometersProgAmount" type="submit" value="Send" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script type='text/javascript'>
+    var kilometersProgAmountEntered;
+    var kilometersProg;
+
+    if (kilometersProgAmountEntered == null) {
+     kilometersProg = 0;
+
+    document.getElementById('kilometersWalkedProgBar').innerHTML = '<div class="progress"><div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="' + kilometersProg + '" aria-valuemin="0" aria-valuemax="100" style="width:' + kilometersProg + '%"> ' + kilometersProg + '% Kilometers Walked/Biked Goal Completed (success)</div></div>';
+
+    };
+
+    document.getElementById('sendKilometersProgAmount').onclick = function(){
+
+     	kilometersProgAmountEntered = document.getElementById('kilometersProgAmountEntered').value;
+    kilometersProg = parseInt(kilometersProgAmountEntered);
+
+    document.getElementById('kilometersWalkedProgBar').innerHTML = '<div class="progress"><div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="' + kilometersProg + '" aria-valuemin="0" aria-valuemax="100" style="width:' + kilometersProg + '%"> ' + kilometersProg + '% Lights Saved Goal Completed (success)</div></div>';
+
+    };
+
+
+    </script>
+
+  </body>
+</html>
